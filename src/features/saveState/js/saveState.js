@@ -86,7 +86,7 @@
                  * @param {object} state the state that should be restored into the grid
                  */
                 restore: function ( $scope, state) {
-                  service.restore(grid, $scope, state);
+                  return service.restore(grid, $scope, state);
                 }
               }
             }
@@ -323,7 +323,7 @@
             service.restoreTreeView( grid, state.treeView );
           }
 
-          grid.refresh();
+          return grid.queueGridRefresh();
         },
 
 
@@ -364,7 +364,7 @@
               column.filters.forEach( function( filter ){
                 var copiedFilter = {};
                 angular.forEach( filter, function( value, key) {
-                  if ( key !== 'condition' && key !== '$$hashKey' && key !== 'placeholder'){
+                  if ( key !== 'condition' && key !== '$$hashKey' && key !== 'placeholder' && key !== 'selectOptions'){
                     copiedFilter[key] = value;
                   }
                 });
