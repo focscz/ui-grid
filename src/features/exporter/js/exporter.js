@@ -373,6 +373,14 @@
 
           /**
            * @ngdoc object
+           * @name exporterMenuVisibleData
+           * @porpertyOf  ui.grid.exporter.api:GridOptions
+           * @description Add export visible data as cvs/pdf menu items to the ui-grid grid menu, if it's present.  Defaults to true.
+           */
+          gridOptions.exporterMenuVisibleData = gridOptions.exporterMenuVisibleData !== undefined ? gridOptions.exporterMenuVisibleData : true;
+
+          /**
+           * @ngdoc object
            * @name exporterMenuCsv
            * @propertyOf  ui.grid.exporter.api:GridOptions
            * @description Add csv export menu items to the ui-grid grid menu, if it's present.  Defaults to true.
@@ -539,7 +547,7 @@
                 this.grid.api.exporter.csvExport( uiGridExporterConstants.VISIBLE, uiGridExporterConstants.VISIBLE );
               },
               shown: function() {
-                return this.grid.options.exporterMenuCsv;
+                return this.grid.options.exporterMenuCsv && this.grid.options.exporterMenuVisibleData;
               },
               order: 201
             },
