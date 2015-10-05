@@ -381,6 +381,14 @@
 
           /**
            * @ngdoc object
+           * @name exporterMenuSelectedData
+           * @porpertyOf  ui.grid.exporter.api:GridOptions
+           * @description Add export selected data as cvs/pdf menu items to the ui-grid grid menu, if it's present.  Defaults to true.
+           */
+          gridOptions.exporterMenuSelectedData = gridOptions.exporterMenuSelectedData !== undefined ? gridOptions.exporterMenuSelectedData : true;
+
+          /**
+           * @ngdoc object
            * @name exporterMenuCsv
            * @propertyOf  ui.grid.exporter.api:GridOptions
            * @description Add csv export menu items to the ui-grid grid menu, if it's present.  Defaults to true.
@@ -557,7 +565,7 @@
                 this.grid.api.exporter.csvExport( uiGridExporterConstants.SELECTED, uiGridExporterConstants.VISIBLE );
               },
               shown: function() {
-                return this.grid.options.exporterMenuCsv &&
+                return this.grid.options.exporterMenuCsv && this.grid.options.exporterMenuSelectedData &&
                        ( this.grid.api.selection && this.grid.api.selection.getSelectedRows().length > 0 );
               },
               order: 202
@@ -578,7 +586,7 @@
                 this.grid.api.exporter.pdfExport( uiGridExporterConstants.VISIBLE, uiGridExporterConstants.VISIBLE );
               },
               shown: function() {
-                return this.grid.options.exporterMenuPdf;
+                return this.grid.options.exporterMenuPdf && this.grid.options.exporterMenuVisibleData;
               },
               order: 204
             },
@@ -588,7 +596,7 @@
                 this.grid.api.exporter.pdfExport( uiGridExporterConstants.SELECTED, uiGridExporterConstants.VISIBLE );
               },
               shown: function() {
-                return this.grid.options.exporterMenuPdf &&
+                return this.grid.options.exporterMenuPdf && this.grid.options.exporterMenuSelectedData &&
                        ( this.grid.api.selection && this.grid.api.selection.getSelectedRows().length > 0 );
               },
               order: 205
