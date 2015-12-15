@@ -1503,6 +1503,7 @@ angular.module('ui.grid')
    * @name handleWindowResize
    * @methodOf ui.grid.class:Grid
    * @description Triggered when the browser window resizes; automatically resizes the grid
+   * @returns {Promise} A resolved promise once the window resize has completed.
    */
   Grid.prototype.handleWindowResize = function handleWindowResize($event) {
     var self = this;
@@ -1510,7 +1511,7 @@ angular.module('ui.grid')
     self.gridWidth = gridUtil.elementWidth(self.element);
     self.gridHeight = gridUtil.elementHeight(self.element);
 
-    self.queueRefresh();
+    return self.queueRefresh();
   };
 
   /**
@@ -2331,7 +2332,7 @@ angular.module('ui.grid')
         //}
 
         // This is the minimum amount of pixels we need to scroll vertical in order to see this row.
-        var pixelsToSeeRow = ((seekRowIndex + 1) * self.options.rowHeight);
+        var pixelsToSeeRow = (seekRowIndex * self.options.rowHeight + self.headerHeight);
 
         // Don't let the pixels required to see the row be less than zero
         pixelsToSeeRow = (pixelsToSeeRow < 0) ? 0 : pixelsToSeeRow;

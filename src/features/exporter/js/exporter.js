@@ -13,7 +13,7 @@
    *
    * <div class="alert alert-success" role="alert"><strong>Stable</strong> This feature is stable. There should no longer be breaking api changes without a deprecation warning.</div>
    *
-   * This module provides the ability to exporter data from the grid.
+   * This module provides the ability to export data from the grid.
    *
    * Data can be exported in a range of formats, and all data, visible
    * data, or selected rows can be exported, with all columns or visible
@@ -884,8 +884,14 @@
          * @description Checks whether current browser is IE and returns it's version if it is
         */
         isIE: function () {
-          var match = navigator.userAgent.match(/(?:MSIE |Trident\/.*; rv:)(\d+)/);
-          return match ? parseInt(match[1]) : false;
+          var match = navigator.userAgent.search(/(?:Edge|MSIE|Trident\/.*; rv:)/);
+          var isIE = false;
+
+          if (match !== -1) {
+            isIE = true;
+          }
+
+          return isIE;
         },
 
 
@@ -1015,14 +1021,24 @@
           var rawFile;
           var ieVersion;
 
-          ieVersion = this.isIE();
+          ieVersion = this.isIE(); // This is now a boolean value
           var doc = pdfMake.createPdf(docDefinition);
           var blob;
 
           doc.getBuffer( function (buffer) {
             blob = new Blob([buffer]);
 
-            if (ieVersion && ieVersion < 10) {
+            // IE10+
+            if (navigator.msSaveBlob) {
+              return navigator.msSaveBlob(
+                blob, fileName
+              );
+            }
+
+            // Previously:  && ieVersion < 10
+            // ieVersion now returns a boolean for the
+            // sake of sanity. We just check `msSaveBlob` first.
+            if (ieVersion) {
               var frame = D.createElement('iframe');
               document.body.appendChild(frame);
 
@@ -1034,13 +1050,6 @@
 
               document.body.removeChild(frame);
               return true;
-            }
-
-            // IE10+
-            if (navigator.msSaveBlob) {
-              return navigator.msSaveBlob(
-                blob, fileName
-              );
             }
           });
         },
