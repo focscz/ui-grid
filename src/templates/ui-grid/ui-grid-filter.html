@@ -7,13 +7,14 @@
     <input
       type="text"
       class="ui-grid-filter-input ui-grid-filter-input-{{$index}}"
-      ng-model="colFilter.term"
+      ng-model="colFilter.term" ng-model-options="{ updateOn: 'change blur' }"
       ng-attr-placeholder="{{colFilter.placeholder || ''}}"
       aria-label="{{colFilter.ariaLabel || aria.defaultFilterLabel}}" />
 
     <div
       role="button"
       class="ui-grid-filter-button"
+      tabIndex="-1"
       ng-click="removeFilter(colFilter, $index)"
       ng-if="!colFilter.disableCancelFilterButton"
       ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
