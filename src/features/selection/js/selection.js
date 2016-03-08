@@ -294,6 +294,15 @@
                 },
                 /**
                  * @ngdoc function
+                 * @name getSelectedCount
+                 * @methodOf  ui.grid.selection.api:PublicApi
+                 * @description returns the number of rows selected
+                 */
+                getSelectedCount: function () {
+                  return grid.selection.selectedCount;
+                },
+                /**
+                 * @ngdoc function
                  * @name setMultiSelect
                  * @methodOf  ui.grid.selection.api:PublicApi
                  * @description Sets the current gridOption.multiSelect to true or false
@@ -658,7 +667,7 @@
                   allowCellFocus: true
                 };
 
-                uiGridCtrl.grid.addRowHeaderColumn(selectionRowHeaderDef);
+                uiGridCtrl.grid.addRowHeaderColumn(selectionRowHeaderDef, 0);
               }
 
               var processorSet = false;
