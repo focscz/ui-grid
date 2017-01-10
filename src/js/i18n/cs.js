@@ -48,9 +48,9 @@
               gridMenu: {
                   columns: 'Sloupce:',
                   importerTitle: 'Importovat soubor',
-                  exporterAllAsCsv: 'Exportovat všechna data do csv',
-                  exporterVisibleAsCsv: 'Exportovat viditelná data do csv',
-                  exporterSelectedAsCsv: 'Exportovat vybraná data do csv',
+                  exporterAllAsCsv: 'Exportovat do CSV',
+                  exporterVisibleAsCsv: 'Exportovat do CSV',
+                  exporterSelectedAsCsv: 'Exportovat do CSV',
                   exporterAllAsPdf: 'Exportovat všechna data do pdf',
                   exporterVisibleAsPdf: 'Exportovat viditelná data do pdf',
                   exporterSelectedAsPdf: 'Exportovat vybraná data do pdf',
